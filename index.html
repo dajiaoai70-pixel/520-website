@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>520 表白</title>
+  <style>
+    :root {
+      --bg1: #ff9a9e;
+      --bg2: #fad0c4;
+      --bg3: #fad0c4;
+      --bg4: #fbc2eb;
+      --text: #fff;
+      --card-bg: rgba(255, 255, 255, 0.14);
+      --btn-bg: #ff5f8f;
+      --btn-bg-hover: #ff3e78;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    body {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3), var(--bg4));
+      background-size: 300% 300%;
+      animation: bgMove 12s ease infinite;
+      padding: 24px;
+    }
+
+    @keyframes bgMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .hearts {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -40px;
+      color: rgba(255, 255, 255, 0.85);
+      animation: floatUp linear infinite;
+      filter: drop-shadow(0 6px 10px rgba(255, 95, 143, 0.35));
+      user-select: none;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(0.8) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.95;
+      }
+      100% {
+        transform: translateY(-120vh) scale(1.2) rotate(20deg);
+        opacity: 0;
+      }
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      width: min(92vw, 540px);
+      padding: 28px 22px;
+      border-radius: 22px;
+      text-align: center;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.16);
+    }
+
+    h1 {
+      font-size: clamp(1.5rem, 5.4vw, 2.1rem);
+      line-height: 1.45;
+      margin-bottom: 16px;
+      min-height: 3.1em;
+      letter-spacing: 0.4px;
+      text-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+    }
+
+    .cursor {
+      display: inline-block;
+      margin-left: 2px;
+      animation: blink 0.8s step-end infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    .sub {
+      font-size: 0.98rem;
+      opacity: 0.92;
+      line-height: 1.75;
+      min-height: 3.2em;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      appearance: none;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 24px;
+      min-height: 48px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(120deg, var(--btn-bg), #ff7ba8);
+      box-shadow: 0 10px 20px rgba(255, 62, 120, 0.35);
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.2s ease;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn:hover {
+      background: linear-gradient(120deg, var(--btn-bg-hover), #ff5f8f);
+      box-shadow: 0 12px 24px rgba(255, 62, 120, 0.42);
+    }
+
+    .confession {
+      margin-top: 20px;
+      font-size: 1.02rem;
+      line-height: 1.9;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 16px;
+      padding: 16px 14px;
+      display: none;
+      text-align: left;
+      animation: fadeIn 0.6s ease;
+    }
+
+    .confession.show {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 390px) {
+      .card {
+        padding: 24px 16px;
+      }
+
+      .sub,
+      .confession {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts" id="hearts" aria-hidden="true"></div>
+
+  <main class="card">
+    <h1 id="title"></h1>
+    <p class="sub">你是我想要认真对待的所有“以后”。</p>
+
+    <button class="btn" id="revealBtn" type="button">点这里</button>
+
+    <section class="confession" id="confession" aria-live="polite">
+      其实我准备了很久，才敢在今天说出口：<br />
+      遇见你之后，平凡的日子都变得闪闪发光。<br />
+      我喜欢你，不是一时心动，而是想和你一起走很远很远。<br />
+      如果你愿意，未来每一个春夏秋冬，我都想陪在你身边。❤️
+    </section>
+  </main>
+
+  <script>
+    const fullText = "今天是520，我想认真告诉你";
+    const titleEl = document.getElementById("title");
+    const heartsEl = document.getElementById("hearts");
+    const revealBtn = document.getElementById("revealBtn");
+    const confessionEl = document.getElementById("confession");
+
+    let idx = 0;
+    function typeWriter() {
+      if (idx <= fullText.length) {
+        titleEl.innerHTML = fullText.slice(0, idx) + '<span class="cursor">|</span>';
+        idx += 1;
+        setTimeout(typeWriter, 120);
+      } else {
+        titleEl.innerHTML = fullText + '<span class="cursor">|</span>';
+      }
+    }
+
+    function createHeart() {
+      const heart = document.createElement("span");
+      heart.className = "heart";
+      heart.textContent = Math.random() > 0.35 ? "❤" : "💗";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = 14 + Math.random() * 22 + "px";
+      heart.style.animationDuration = 5 + Math.random() * 6 + "s";
+      heart.style.animationDelay = Math.random() * 2 + "s";
+      heartsEl.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 12000);
+    }
+
+    setInterval(createHeart, 380);
+    typeWriter();
+
+    revealBtn.addEventListener("click", () => {
+      confessionEl.classList.add("show");
+      revealBtn.textContent = "已为你展开 ❤";
+      revealBtn.disabled = true;
+    });
+  </script>
+</body>
+</html>
